@@ -90,11 +90,149 @@ body[data-app-theme] .homepage .btn:not(.secondary):not(.soft){background:var(--
 @media(prefers-reduced-motion:reduce){.homepage .home-panel,.homepage .home-link .icon,.homepage .btn{transition:none}.homepage .btn:hover{transform:none}}
 body.calm .homepage .home-panel,body.calm .homepage .home-link .icon{transition:none}
 
+/* Homepage taste revision: welcome hero and navigation only. */
+.homepage{--home-space-1:8px;--home-space-2:16px;--home-space-3:24px;--home-space-4:32px;--home-space-5:48px;--home-space-6:64px;--home-gutter:clamp(24px,4.45vw,64px)}
+.homepage .home-nav{width:calc(100vw - 2 * var(--home-gutter));max-width:1312px;min-height:104px;gap:var(--home-space-4)}
+.homepage .home-logo img{width:190px;mix-blend-mode:multiply}
+.homepage .home-links{gap:var(--home-space-4)}
+.homepage .home-link{font-size:14px;transition:color 180ms ease}
+.homepage .home-links .home-login{margin-left:var(--home-space-2);color:var(--ink)}
+.homepage .home-link:hover,.homepage .home-link[aria-expanded=true]{color:var(--green);text-decoration:underline;text-underline-offset:7px;text-decoration-thickness:2px}
+.homepage .home-links .btn{padding:14px 22px;min-height:48px;font-size:14px}
+.homepage .home-nav :is(button,a):focus-visible,.homepage .landing-actions button:focus-visible{outline:3px solid var(--green);outline-offset:5px}
+.homepage .landing{max-width:1440px;min-height:calc(100svh - 104px);padding:var(--home-space-3) var(--home-gutter) var(--home-space-5);grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);gap:var(--home-space-5);align-items:stretch}
+.homepage .landing-content{grid-column:1;grid-row:1;min-height:640px;padding:var(--home-space-5) 0;align-items:flex-start;justify-content:center}
+.homepage .landing-content>.eyebrow{order:0;font-size:13px;letter-spacing:0;line-height:1.5;color:var(--green)}
+.homepage .landing-content h1{order:1;font-family:Georgia,serif;font-size:clamp(48px,5.3vw,76px);line-height:1.03;font-weight:400;letter-spacing:-.045em;color:var(--ink);margin:var(--home-space-3) 0 var(--home-space-4);text-wrap:initial}
+.homepage .landing-content>p:not(.demo-note){order:2;font-size:17px;line-height:1.7;max-width:43ch;margin:0 0 var(--home-space-3);color:var(--ink)}
+.homepage .landing-features{order:3;gap:var(--home-space-2) var(--home-space-3);font-size:13px;line-height:1.5;color:var(--green);margin:0 0 var(--home-space-4)}
+.homepage .landing-features .icon{color:var(--green);width:16px;height:16px}
+.homepage .landing-actions{order:4;align-self:stretch;flex-direction:row;align-items:center;flex-wrap:wrap;gap:var(--home-space-3);margin:0}
+.homepage .landing-actions .btn{width:auto;min-width:176px;min-height:54px;font-size:15px;padding:16px 24px}
+.homepage .landing-actions .text-btn{font-size:14px;min-height:48px;margin-top:0!important;padding:10px 0;color:var(--green)}
+.homepage .landing-actions .text-btn:hover{text-decoration:underline;text-underline-offset:5px}
+.homepage .landing-content>.demo-note{order:5;text-align:left;font-size:13px;line-height:1.6;margin:var(--home-space-2) 0 0;color:var(--muted)}
+.homepage .landing-content>.prototype{order:6;align-self:flex-start;margin:var(--home-space-4) 0 0;padding:0;border:0;border-radius:0;font-size:13px;letter-spacing:0;color:var(--muted)}
+.homepage .landing-art{grid-column:2;grid-row:1;min-height:640px;height:auto;padding:var(--home-space-4);border-radius:26px}
+.homepage .landing-center{margin:auto 0;padding-bottom:var(--home-space-3);mix-blend-mode:multiply}
+.homepage .home-emblem{width:clamp(240px,25vw,340px);aspect-ratio:400/362;margin:0 auto var(--home-space-4);padding:0;border-radius:0;background:transparent;mix-blend-mode:multiply}
+.homepage .landing-center h2{font-size:clamp(30px,2.65vw,38px);line-height:1.12;letter-spacing:-.03em;color:var(--green)}
+.homepage .landing-center p{font-size:14px;line-height:1.6;margin-top:var(--home-space-2)}
+@keyframes home-arrive{from{opacity:.5;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:no-preference){
+ body:not(.calm) .homepage .landing-content h1,body:not(.calm) .homepage .landing-content>p:not(.demo-note),body:not(.calm) .homepage .landing-actions{animation:home-arrive 600ms ease-out both}
+ body:not(.calm) .homepage .landing-content>p:not(.demo-note){animation-delay:60ms}
+ body:not(.calm) .homepage .landing-actions{animation-delay:120ms}
+ body:not(.calm) .homepage .home-emblem{animation:home-arrive 800ms ease-out both}
+}
+@media(min-width:741px) and (max-width:1100px){
+ .homepage{--home-gutter:32px}
+ .homepage .home-nav{min-height:92px;gap:24px}
+ .homepage .home-logo img{width:156px}
+ .homepage .home-links{gap:20px}
+ .homepage .home-links .home-login{margin-left:0}
+ .homepage .home-link{font-size:13px}
+ .homepage .home-links .btn{padding:12px 16px;font-size:13px}
+ .homepage .landing{gap:32px;min-height:0;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)}
+ .homepage .landing-content,.homepage .landing-art{min-height:620px}
+ .homepage .landing-content h1{font-size:clamp(43px,5.3vw,58px)}
+ .homepage .landing-content>p:not(.demo-note){font-size:16px}
+ .homepage .landing-art{padding:24px 16px}
+ .homepage .home-emblem{width:100%;max-width:280px}
+ .homepage .landing-center h2{font-size:30px}
+ .homepage .landing-center p{font-size:13px}
+ .homepage .landing-actions{gap:8px 24px}
+}
+@media(max-width:740px){
+ .homepage{--home-gutter:24px}
+ .homepage .home-nav{min-height:88px;gap:0}
+ .homepage .home-logo img{width:160px}
+ .homepage .home-menu{font-size:14px}
+ .homepage .home-links{gap:4px;padding-bottom:24px}
+ .homepage .home-link{font-size:15px}
+ .homepage .home-links .home-login{margin-left:0}
+ .homepage .landing{grid-template-columns:minmax(0,1fr);gap:32px;min-height:0;padding-top:24px;padding-bottom:32px}
+ .homepage .landing-content{grid-column:1;grid-row:1;min-height:0;padding:8px 0 0}
+ .homepage .landing-content>.eyebrow{font-size:13px;letter-spacing:0}
+ .homepage .landing-content h1{font-size:clamp(43px,11.5vw,64px);line-height:1.06;margin:16px 0 24px}
+ .homepage .landing-content>p:not(.demo-note){font-size:16px;line-height:1.65;margin-bottom:24px;max-width:43ch}
+ .homepage .landing-features{gap:12px 16px;font-size:13px;margin-bottom:24px}
+ .homepage .landing-actions{flex-direction:column;align-items:stretch;gap:8px;width:100%}
+ .homepage .landing-actions .btn{width:100%;min-height:52px}
+ .homepage .landing-content>.demo-note{font-size:13px;margin-top:8px;text-align:center}
+ .homepage .landing-content>.prototype{margin-top:24px;font-size:13px}
+ .homepage .landing-art{grid-column:1;grid-row:2;min-height:390px;height:auto;padding:32px 24px}
+ .homepage .landing-center{padding-bottom:0}
+ .homepage .home-emblem{width:220px;margin-bottom:24px}
+ .homepage .landing-center h2{font-size:32px}
+ .homepage .landing-center p{display:block;font-size:13px;margin-top:16px}
+}
+@media(prefers-reduced-motion:reduce){.homepage .home-link,.homepage .home-menu,.homepage .landing-actions button{transition:none}}
+body.calm .homepage .home-link,body.calm .homepage .landing-actions button{transition:none}
+
+/* Garden round one: color and existing artwork, keeping the approved hero grid and type. */
+.homepage{--home-blush:#f2e1e8;--home-soft-green:#e3ecd9;--home-card-shadow:0 12px 32px #315e4d12;background:linear-gradient(125deg,var(--home-soft-green),var(--home-blush));isolation:isolate;position:relative}
+.homepage .home-header,body[data-app-theme] .homepage .landing{background:transparent}
+.homepage .landing{background:transparent;position:relative;isolation:isolate}
+.homepage .landing:before,.homepage .landing:after{content:"";position:absolute;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(48px);opacity:.5}
+.homepage .landing:before{width:40%;height:45%;left:0;top:20%;background:radial-gradient(ellipse,var(--sage),transparent 72%)}
+.homepage .landing:after{width:45%;height:55%;right:3%;bottom:0;background:radial-gradient(ellipse,var(--pale),transparent 72%)}
+body[data-app-theme] .homepage .landing-art{background:var(--pale) url('assets/homepage-background.webp') center/cover}
+.homepage .landing-art{isolation:isolate;box-shadow:var(--home-card-shadow)}
+.homepage .landing-center{mix-blend-mode:normal}
+.homepage .home-logo img,.homepage .home-emblem{mix-blend-mode:normal;filter:url(#home-paper-cutout)}
+.homepage .landing-content h1{background:none;box-shadow:none;text-shadow:none}
+.homepage .landing-content>.prototype{background:var(--sage);color:var(--green);border-radius:999px;padding:5px 12px;font-size:10px;line-height:1.6;letter-spacing:.04em}
+.homepage .home-emblem{margin-bottom:32px}
+.homepage .landing-center p{color:var(--green)}
+.home-leaf-drift{position:absolute;right:-46px;bottom:28px;width:250px;height:190px;pointer-events:none;background:url('assets/homepage-background.webp') right bottom/720px 405px;opacity:.16;mask-image:radial-gradient(ellipse at 70% 70%,black 15%,transparent 70%);z-index:-1}
+.homepage .home-panel{border-radius:24px;position:relative;isolation:isolate}
+.homepage #home-about{background:linear-gradient(135deg,var(--sage),var(--surface))}
+.homepage #home-how{background:linear-gradient(135deg,var(--home-blush),var(--pale))}
+.homepage .home-panel:before{content:"";position:absolute;inset:0;pointer-events:none;background:url('assets/homepage-background.webp') right bottom/560px auto no-repeat;opacity:.28;z-index:-1;mask-image:radial-gradient(ellipse at right bottom,black,transparent 75%)}
+.homepage .home-panel-inner{border-top:0;padding:34px 24px 40px}
+.homepage .home-guide{gap:24px;align-items:start}
+.homepage .home-guide-card{padding:0;border:0;border-radius:20px;background:var(--surface);box-shadow:var(--home-card-shadow);overflow:hidden}
+.home-card-art{height:140px;overflow:hidden;background:var(--sage)}
+.home-card-art img{display:block;width:100%;height:100%;object-fit:cover;object-position:0 100%;transform:scale(1.6);transform-origin:left bottom}
+.home-card-art-1 img{object-position:100% 0;transform-origin:right top}
+.home-card-art-2 img{object-position:100% 100%;transform-origin:right bottom}
+.home-card-copy{padding:24px}
+.homepage .home-card-copy>h3{margin:0 0 24px}
+.home-guide-detail+.home-guide-detail{margin-top:24px}
+.homepage .home-guide-detail h4{font-size:16px;font-weight:600;color:var(--green);margin:0 0 8px}
+.homepage .home-team{gap:16px}
+.homepage .home-team li{display:flex;align-items:center;gap:12px;border:0;padding:16px;background:var(--surface);border-radius:16px;box-shadow:var(--home-card-shadow)}
+.home-initials{display:grid;place-items:center;flex:0 0 40px;height:40px;border-radius:50%;background:var(--sage);color:var(--green);font-weight:600}
+.home-team li:nth-child(even) .home-initials{background:var(--pale);color:var(--ink)}
+.homepage .landing-content h1,.homepage .landing-content>p:not(.demo-note),.homepage .landing-actions,.homepage .home-emblem{animation:none!important}
+@media(min-width:741px) and (max-width:1000px){.homepage .home-guide{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.home-card-copy{padding:16px}.home-card-art{height:110px}}
+@media(max-width:740px){.homepage .home-panel-inner{padding:24px 16px 30px}.homepage .home-guide{grid-template-columns:1fr}.home-card-art{height:120px}.homepage .home-team{grid-template-columns:1fr}.home-leaf-drift{width:180px;height:150px;bottom:0}.homepage .home-emblem{margin-bottom:24px}}
+
+/* Garden round two: only transform and opacity animate. */
+.homepage .home-panel{display:none;height:auto;opacity:1;visibility:visible;transition:none}
+.homepage .home-panel.is-open{display:block;transition:none}
+.homepage .home-link,.homepage .home-menu{transition:none}
+.homepage .btn,.homepage .text-btn,.homepage .home-guide-card,.homepage .home-team li{transition:transform 240ms ease;filter:none}
+.homepage .btn:hover{filter:none}
+@keyframes home-leaf-float{0%,100%{transform:translate(0,0) rotate(-2deg);opacity:.12}50%{transform:translate(-8px,-12px) rotate(2deg);opacity:.18}}
+@media(prefers-reduced-motion:no-preference){
+ body:not(.calm) .homepage .landing-art.home-art-visible .home-leaf-drift{animation:home-leaf-float 18s ease-in-out infinite}
+ body:not(.calm) .homepage.home-revealing .home-leaf-drift{animation-play-state:paused}
+}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){
+ body:not(.calm) .homepage .home-guide-card:hover,body:not(.calm) .homepage .home-team li:hover{transform:translateY(-3px)}
+ body:not(.calm) .homepage .btn:hover,body:not(.calm) .homepage .text-btn:hover{transform:translateY(-2px)}
+}
+@media(prefers-reduced-motion:reduce){.homepage *, .homepage *:before,.homepage *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.homepage .btn:hover,.homepage .text-btn:hover,.homepage .home-guide-card:hover,.homepage .home-team li:hover{transform:none}}
+body.calm .homepage *,body.calm .homepage *:before,body.calm .homepage *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+body.calm .homepage .btn:hover,body.calm .homepage .text-btn:hover,body.calm .homepage .home-guide-card:hover,body.calm .homepage .home-team li:hover{transform:none}
 </style>
 </head>
 <body>
 <!-- All artwork, styles and functionality are embedded. No setup or internet needed. -->
 <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true"><defs>
+<filter id="home-paper-cutout" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 -10 -10 -10 0 29"/><feComposite in2="SourceGraphic" operator="in"/></filter>
 <linearGradient id="leafGreen" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c0d7b6"/><stop offset=".55" stop-color="#7ba58e"/><stop offset="1" stop-color="#285c4c"/></linearGradient>
 <linearGradient id="leafPurple" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f1e4ff"/><stop offset=".6" stop-color="#c0a1ef"/><stop offset="1" stop-color="#8c66ca"/></linearGradient>
 <symbol id="mark" viewBox="0 0 100 100"><path d="M49 89C16 88 7 64 17 34c8 21 35 14 32 55Z" fill="url(#leafGreen)"/><path d="M52 89c-4-41 26-28 36-61 12 37-8 60-36 61Z" fill="url(#leafPurple)"/><path d="M20 47c8 16 22 20 29 41M83 42C72 61 59 65 53 89" fill="none" stroke="#fffdf7" stroke-width="1.7"/><circle cx="51" cy="39" r="10" fill="url(#leafPurple)"/><path d="M23 29C31 9 56 6 70 17" fill="none" stroke="#8cb596" stroke-width="2.5" stroke-linecap="round"/><path d="m81 8 2.8 8.2L92 19l-8.2 2.8L81 30l-2.8-8.2L70 19l8.2-2.8Z" fill="#ad8de0"/></symbol>
@@ -136,23 +274,45 @@ function applyTheme(){const t=appThemeCatalog.find(t=>t.id===state.theme)||appTh
 function go(next){page=next;if(next==='mood'){const m=state.moods.find(m=>m.date===dateKey());moodChoice=m?.mood??3;energyChoice=m?.energy??4}render();window.scrollTo(0,0);const title=$('h1');if(title){title.setAttribute('tabindex','-1');title.focus({preventScroll:true});title.style.outline='none'}}
 function navigation(bottom=false){const active=['sleep','mood'].includes(page)?'track':page;return `<nav class="${bottom?'bottom-nav':'nav'}" aria-label="${bottom?'Mobile navigation':'Main navigation'}">${navs.map(([id,ic,label])=>`<button data-go="${id==='track'?'sleep':id}" class="${active===id?'active':''}" ${active===id?'aria-current="page"':''} aria-label="${label}">${icon(ic)}<span>${label}</span></button>`).join('')}</nav>`}
 function header(title,sub,action=''){return `<div class="page-head"><div><h1>${title}</h1><p>${sub}</p></div>${action||`<div class="date-label">${icon('calendar')}${prettyDate(dateKey(),{weekday:'short',month:'short',day:'numeric',year:'numeric'})}</div>`}</div>`}
-function render(){ensureGarden();applyTheme();const app=$('#app');if(page==='welcome'||page==='auth'){app.innerHTML=landing();if(page==='welcome')bindHomepage();return}const labels={home:'Overview',garden:'My Garden',sleep:'Sleep tracker',mood:'Mood & energy',tasks:'My tasks',rewards:'Rewards & themes',profile:'Profile & settings'};app.innerHTML=`<div class="shell"><aside class="sidebar">${brand()}<div class="side-caption">GROW AT YOUR OWN PACE</div><div class="nav-label">YOUR SPACE</div>${navigation()}<div class="sidebar-bottom"><div class="side-note">${icon('leaf')}<p>A little better,<br>every day.</p><span class="small muted">Your pace. Your progress.</span></div><button class="side-user" data-go="profile"><span class="avatar">${initials()}</span><span><strong>${esc(state.name)}</strong><small>My wellness space</small></span>${icon('arrow')}</button></div></aside><div class="workspace"><header class="topbar"><div class="breadcrumb">Your space <span>/</span> <b>${labels[page]}</b></div><div class="top-actions"><span class="demo-tag">PROTOTYPE</span><button class="icon-btn" data-action="notifications" aria-label="View notifications">${icon('bell')}</button><button class="avatar" data-go="profile" aria-label="Open profile" style="border:0">${initials()}</button></div></header><main class="main fade">${({home:home,garden:garden,sleep:sleep,mood:mood,tasks:tasks,rewards:rewards,profile:profile}[page]||home)()}<div class="bottom-note">${icon('leaf')} A little care for yourself goes a long way.</div></main></div>${navigation(true)}</div>`;gardenCelebrate()}
+function render(){homeMotionCleanup();ensureGarden();applyTheme();const app=$('#app');if(page==='welcome'||page==='auth'){app.innerHTML=landing();if(page==='welcome')bindHomepage();return}const labels={home:'Overview',garden:'My Garden',sleep:'Sleep tracker',mood:'Mood & energy',tasks:'My tasks',rewards:'Rewards & themes',profile:'Profile & settings'};app.innerHTML=`<div class="shell"><aside class="sidebar">${brand()}<div class="side-caption">GROW AT YOUR OWN PACE</div><div class="nav-label">YOUR SPACE</div>${navigation()}<div class="sidebar-bottom"><div class="side-note">${icon('leaf')}<p>A little better,<br>every day.</p><span class="small muted">Your pace. Your progress.</span></div><button class="side-user" data-go="profile"><span class="avatar">${initials()}</span><span><strong>${esc(state.name)}</strong><small>My wellness space</small></span>${icon('arrow')}</button></div></aside><div class="workspace"><header class="topbar"><div class="breadcrumb">Your space <span>/</span> <b>${labels[page]}</b></div><div class="top-actions"><span class="demo-tag">PROTOTYPE</span><button class="icon-btn" data-action="notifications" aria-label="View notifications">${icon('bell')}</button><button class="avatar" data-go="profile" aria-label="Open profile" style="border:0">${initials()}</button></div></header><main class="main fade">${({home:home,garden:garden,sleep:sleep,mood:mood,tasks:tasks,rewards:rewards,profile:profile}[page]||home)()}<div class="bottom-note">${icon('leaf')} A little care for yourself goes a long way.</div></main></div>${navigation(true)}</div>`;gardenCelebrate()}
 
 // Informational navigation belongs only to the public welcome screen.
 function homepageNav(){return `<header class="home-header"><nav class="home-nav" aria-label="Homepage"><a class="home-logo" href="#homepage-top" aria-label="MindRise home"><img src="assets/mindrise-logo.webp" alt="MindRise" width="560" height="150"></a><button class="home-menu" aria-expanded="false" aria-controls="home-links">Menu <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg></button><div class="home-links" id="home-links"><button class="home-link" data-home-panel="about" aria-expanded="false" aria-controls="home-about">About Us ${icon('right')}</button><button class="home-link" data-home-panel="how" aria-expanded="false" aria-controls="home-how">How It Works ${icon('right')}</button><button class="home-link home-login" data-action="login">Log In</button><button class="btn" data-action="start">Get Started ${icon('right')}</button></div></nav>
-<section class="home-panel" id="home-about" aria-labelledby="home-about-title" aria-hidden="true" inert><div class="home-panel-inner"><div class="home-panel-head"><div><h2 id="home-about-title">Made with student life in mind.</h2><p>Room for rest. Space to check in. A gentler rhythm for your day.</p></div><button class="home-close" data-home-close aria-label="Close About Us">${icon('close')}</button></div><div class="home-about-grid"><div><h3>A little about why</h3><p class="home-story">We’re building MindRise to make healthier routines feel more manageable for students—a little space to pause, plan, and grow alongside everyday student life.</p><p class="home-purpose">Created with FEU students in mind, MindRise brings sleep habits, mood and energy check-ins, and personal touches into one habit and wellness tool. Our goal is to support more manageable mornings and daily routines, especially around early classes.</p></div><div><h3>Meet Group Tree</h3><ul class="home-team"><li><span>Lasrec Dizon</span><small>Group leader</small></li><li>Cyron Sean Marc Familar</li><li>Louis Levi Mari Menor</li><li>Justine Lawrence Ng</li><li>Timothy James Oriola</li><li>Benedict Lachica</li></ul></div></div></div></section>
-<section class="home-panel" id="home-how" aria-labelledby="home-how-title" aria-hidden="true" inert><div class="home-panel-inner"><div class="home-panel-head"><div><h2 id="home-how-title">Small habits. Room to grow.</h2><p>Check in with your day, make a little plan, and give your garden a little care.</p></div><button class="home-close" data-home-close aria-label="Close How It Works">${icon('close')}</button></div><div class="home-guide">
-<article><h3>Your day, together</h3><p>Home brings your latest sleep, mood, energy, today’s tasks, activity streak, and growing plant into one view. Jump into a check-in or pick up where you left off.</p></article>
-<article><h3>Make room for rest</h3><p>Enter your bedtime and wake-up time manually. Review sleep duration and averages in week or month views, or add a wind-down task. Saving a date again updates that day’s log.</p></article>
-<article><h3>Notice how you feel</h3><p>Choose from five moods, rate your energy from 1 to 5, and add an optional journal note. Save or update today’s check-in and look back at your five most recent entries.</p></article>
-<article><h3>A plan at your pace</h3><p>Add, edit, complete, or delete tasks with a date, time, and Academic, Wellness, or Personal category. Switch between today and this week, and see today’s progress as you go.</p></article>
-<article><h3>Grow a little garden</h3><p>Plant an owned seed in the Nursery. A newly rewarded sleep log or completed task for today helps it grow once that day. After seven active days, your plant moves into your Garden. Missed days don’t reset its growth.</p></article>
-<article><h3>Celebrate showing up</h3><p>Sleep logs and today’s tasks can earn Mind Gems and XP, with bonuses for activity streaks. Mood check-ins count toward your streak, too. Rewards tracks Early Bird, Focus Pro, and Consistency milestones.</p></article>
-<article><h3>Make it feel like you</h3><p>Spend Mind Gems on seeds, pots, milestone tags, and backgrounds in the Shop. Customize growing and collected plants, choose a shared Garden backdrop, and select free or unlockable app themes separately.</p></article>
-<article><h3>Keep a piece of your progress</h3><p>Download a plant portrait or your whole Garden as a PNG. Use the device’s share menu when supported. Individual plant cards keep their own style; your Garden has its own shared backdrop.</p></article>
-<article><h3>Your space, your settings</h3><p>Edit your name, school, and optional email. Turn in-app task reminders on or off, enable Calm mode to reduce motion, or open the demo guide. Log out to return here, or reset the presentation to restore sample data.</p></article>
-</div><details class="home-rules"><summary>A closer look at rewards & garden growth</summary><ul><li>A newly rewarded sleep date earns 50 Mind Gems and 50 XP; a newly completed task dated today earns 20 of each. Each sleep date and task earns only once. Existing sample history earns no retroactive rewards.</li><li>Activity streaks apply a 1× multiplier for days 1–2, 1.25× for days 3–6, and 1.5× from day 7. Rewards round to the nearest whole number. Mood check-ins record activity but do not directly award Gems, XP, or plant growth.</li><li>Plant a seed before your next rewarded action. One plant grows at a time, at most once per calendar day. Its XP accumulates separately; seven active growth days bring it to Max Level and save it in your Garden.</li><li>Seeds are consumed when planted. Purchased pots, tags, backgrounds, and app themes stay unlocked in your browser’s saved demo. You can start another plant after the current one matures.</li><li>Early Bird recognizes a sleep log; Focus Pro recognizes three completed tasks today; Consistency recognizes a five-day activity streak.</li></ul></details><p class="home-storage"><strong>A note about this demo:</strong> Get started and Log In open demo profiles, not real accounts. Sample history is included. Progress stays in this browser when storage is available; otherwise it lasts for the session. There is no cloud sync, automatic health tracking, or push notification service. Clearing browser data removes saved progress.</p></div></section></header>`}
-function homepageArt(){return `<div class="landing-center"><img class="home-emblem" src="assets/mindrise-emblem.webp" alt="" width="400" height="362" fetchpriority="high"><h2>Healthier habits.<br>Brighter days.</h2><p>A little space to grow into your best self.</p></div><div class="art-footer">Rooted in care. Designed for you.</div>`}
+<section class="home-panel" id="home-about" aria-labelledby="home-about-title" aria-hidden="true" inert><div class="home-panel-inner"><div class="home-panel-head"><div><h2 id="home-about-title">Made with student life in mind.</h2><p>Room for rest. Space to check in. A gentler rhythm for your day.</p></div><button class="home-close" data-home-close aria-label="Close About Us">${icon('close')}</button></div><div class="home-about-grid"><div><h3>A little about why</h3><p class="home-story">We’re building MindRise to make healthier routines feel more manageable for students—a little space to pause, plan, and grow alongside everyday student life.</p><p class="home-purpose">Created with FEU students in mind, MindRise brings sleep habits, mood and energy check-ins, and personal touches into one habit and wellness tool. Our goal is to support more manageable mornings and daily routines, especially around early classes.</p></div><div><h3>Meet Team TRX</h3><ul class="home-team"><li><span class="home-initials" aria-hidden="true">LD</span><div><span>Lasrec Dizon</span><small>Group leader</small></div></li><li><span class="home-initials" aria-hidden="true">CF</span><div>Cyron Sean Marc Familar</div></li><li><span class="home-initials" aria-hidden="true">LM</span><div>Louis Levi Mari Menor</div></li><li><span class="home-initials" aria-hidden="true">JN</span><div>Justine Lawrence Ng</div></li><li><span class="home-initials" aria-hidden="true">TO</span><div>Timothy James Oriola</div></li><li><span class="home-initials" aria-hidden="true">BL</span><div>Benedict Lachica</div></li></ul></div></div></div></section>
+<section class="home-panel" id="home-how" aria-labelledby="home-how-title" aria-hidden="true" inert><div class="home-panel-inner"><div class="home-panel-head"><div><h2 id="home-how-title">Small habits. Room to grow.</h2><p>Check in with your day, make a little plan, and give your garden a little care.</p></div><button class="home-close" data-home-close aria-label="Close How It Works">${icon('close')}</button></div><div class="home-guide"><article class="home-guide-card"><div class="home-card-art home-card-art-0" aria-hidden="true"><img src="assets/homepage-background.webp" alt="" width="1280" height="720"></div><div class="home-card-copy"><h3>Habits</h3><div class="home-guide-detail"><h4>Your day, together</h4><p>Home brings your latest sleep, mood, energy, today’s tasks, activity streak, and growing plant into one view. Jump into a check-in or pick up where you left off.</p></div><div class="home-guide-detail"><h4>Make room for rest</h4><p>Enter your bedtime and wake-up time manually. Review sleep duration and averages in week or month views, or add a wind-down task. Saving a date again updates that day’s log.</p></div><div class="home-guide-detail"><h4>A plan at your pace</h4><p>Add, edit, complete, or delete tasks with a date, time, and Academic, Wellness, or Personal category. Switch between today and this week, and see today’s progress as you go.</p></div></div></article><article class="home-guide-card"><div class="home-card-art home-card-art-1" aria-hidden="true"><img src="assets/homepage-background.webp" alt="" width="1280" height="720"></div><div class="home-card-copy"><h3>Check-ins</h3><div class="home-guide-detail"><h4>Notice how you feel</h4><p>Choose from five moods, rate your energy from 1 to 5, and add an optional journal note. Save or update today’s check-in and look back at your five most recent entries.</p></div><div class="home-guide-detail"><h4>Celebrate showing up</h4><p>Sleep logs and today’s tasks can earn Mind Gems and XP, with bonuses for activity streaks. Mood check-ins count toward your streak, too. Rewards tracks Early Bird, Focus Pro, and Consistency milestones.</p></div><div class="home-guide-detail"><h4>Your space, your settings</h4><p>Edit your name, school, and optional email. Turn in-app task reminders on or off, enable Calm mode to reduce motion, or open the demo guide. Log out to return here, or reset the presentation to restore sample data.</p></div></div></article><article class="home-guide-card"><div class="home-card-art home-card-art-2" aria-hidden="true"><img src="assets/homepage-background.webp" alt="" width="1280" height="720"></div><div class="home-card-copy"><h3>Garden</h3><div class="home-guide-detail"><h4>Grow a little garden</h4><p>Plant an owned seed in the Nursery. A newly rewarded sleep log or completed task for today helps it grow once that day. After seven active days, your plant moves into your Garden. Missed days don’t reset its growth.</p></div><div class="home-guide-detail"><h4>Make it feel like you</h4><p>Spend Mind Gems on seeds, pots, milestone tags, and backgrounds in the Shop. Customize growing and collected plants, choose a shared Garden backdrop, and select free or unlockable app themes separately.</p></div><div class="home-guide-detail"><h4>Keep a piece of your progress</h4><p>Download a plant portrait or your whole Garden as a PNG. Use the device’s share menu when supported. Individual plant cards keep their own style; your Garden has its own shared backdrop.</p></div></div></article></div><details class="home-rules"><summary>A closer look at rewards & garden growth</summary><ul><li>A newly rewarded sleep date earns 50 Mind Gems and 50 XP; a newly completed task dated today earns 20 of each. Each sleep date and task earns only once. Existing sample history earns no retroactive rewards.</li><li>Activity streaks apply a 1× multiplier for days 1–2, 1.25× for days 3–6, and 1.5× from day 7. Rewards round to the nearest whole number. Mood check-ins record activity but do not directly award Gems, XP, or plant growth.</li><li>Plant a seed before your next rewarded action. One plant grows at a time, at most once per calendar day. Its XP accumulates separately; seven active growth days bring it to Max Level and save it in your Garden.</li><li>Seeds are consumed when planted. Purchased pots, tags, backgrounds, and app themes stay unlocked in your browser’s saved demo. You can start another plant after the current one matures.</li><li>Early Bird recognizes a sleep log; Focus Pro recognizes three completed tasks today; Consistency recognizes a five-day activity streak.</li></ul></details><p class="home-storage"><strong>A note about this demo:</strong> Get started and Log In open demo profiles, not real accounts. Sample history is included. Progress stays in this browser when storage is available; otherwise it lasts for the session. There is no cloud sync, automatic health tracking, or push notification service. Clearing browser data removes saved progress.</p></div></section></header>`}
+function homepageArt(){return `<div class="home-leaf-drift" aria-hidden="true"></div><div class="landing-center"><img class="home-emblem" src="assets/mindrise-emblem.webp" alt="" width="400" height="362" fetchpriority="high"><p>A little space to grow into your best self.</p></div><div class="art-footer">Rooted in care. Designed for you.</div>`}
+let homeMotionCleanup=()=>{};
+function bindHomeMotion(root){
+ const preference=matchMedia('(prefers-reduced-motion: reduce)');
+ const art=root.querySelector('.landing-art');
+ const seen=new WeakSet(),queue=[];
+ let active=null,disposed=false;
+ const enabled=()=>!preference.matches&&!document.body.classList.contains('calm');
+ const next=()=>{
+  if(active||disposed)return;
+  if(!enabled()){queue.length=0;return}
+  let target;
+  while(queue.length){const candidate=queue.shift(),r=candidate.getBoundingClientRect();if(r.height&&r.bottom>0&&r.top<innerHeight){target=candidate;break}}
+  if(!target){root.classList.remove('home-revealing');return}
+  root.classList.add('home-revealing');
+  active=target.animate([{opacity:.7,transform:'translateY(10px)'},{opacity:1,transform:'translateY(0)'}],{duration:650,easing:'ease-out'});
+  active.onfinish=()=>{active=null;next()};
+ };
+ const observer=new IntersectionObserver(entries=>{
+  for(const entry of entries){
+   if(entry.target===art){art.classList.toggle('home-art-visible',entry.isIntersecting);continue}
+   if(entry.isIntersecting&&!seen.has(entry.target)){
+    seen.add(entry.target);if(enabled())queue.push(entry.target);
+   }
+  }
+  next();
+ },{threshold:.08});
+ observer.observe(art);
+ root.querySelectorAll('.landing-content,.home-panel-head,.home-about-grid,.home-guide-card,.home-rules,.home-storage').forEach(el=>observer.observe(el));
+ const stop=()=>{if(!enabled()){queue.length=0;if(active){active.cancel();active=null}root.classList.remove('home-revealing')}};
+ preference.addEventListener('change',stop);
+ homeMotionCleanup=()=>{disposed=true;observer.disconnect();preference.removeEventListener('change',stop);if(active)active.cancel();queue.length=0};
+}
 function bindHomepage(){
  const root=$('.homepage');if(!root)return;
  const menu=root.querySelector('.home-menu'),links=root.querySelector('.home-links');
@@ -166,14 +326,11 @@ function bindHomepage(){
   for(const toggle of toggles){
    const panel=root.querySelector('#'+toggle.getAttribute('aria-controls'));
    const open=toggle.dataset.homePanel===id;
-   // Snapshot the current height so reversals continue from the visible position.
-   panel.style.height=panel.getBoundingClientRect().height+'px';
-   void panel.offsetHeight;
    if(!open&&panel.contains(document.activeElement))restoreToggle(toggle);
    panel.inert=!open;panel.setAttribute('aria-hidden',String(!open));
    panel.classList.toggle('is-open',open);toggle.setAttribute('aria-expanded',String(open));
-   panel.style.height=open?panel.firstElementChild.getBoundingClientRect().height+'px':'0px';
-   if(open&&getComputedStyle(panel).transitionDuration.split(',').every(t=>parseFloat(t)===0))panel.style.height='auto';
+   // Layout changes immediately; the content reveal animates only transform and opacity.
+   panel.style.height=open?'auto':'0px';
   }
   if(restoreFocus&&current)restoreToggle(toggles.find(t=>t.dataset.homePanel===current));
   current=id;
@@ -193,18 +350,14 @@ function bindHomepage(){
   if(current){e.preventDefault();setPanel(null,true)}
   else if(menu.getAttribute('aria-expanded')==='true'){e.preventDefault();setMenu(false);menu.focus()}
  });
- // After the transition, auto height accommodates details, zoom and wrapping.
- root.querySelectorAll('.home-panel').forEach(panel=>panel.addEventListener('transitionend',e=>{
-  if(e.target===panel&&e.propertyName==='height'&&panel.classList.contains('is-open'))panel.style.height='auto';
- }));
- root.querySelectorAll('.home-panel').forEach(panel=>panel.addEventListener('transitioncancel',()=>{
-  if(panel.classList.contains('is-open')&&getComputedStyle(panel).transitionDuration.split(',').every(t=>parseFloat(t)===0))panel.style.height='auto';
- }));
  const layoutObserver=new ResizeObserver(()=>{
   if(!root.isConnected){layoutObserver.disconnect();return}
   if(menu.getClientRects().length&&!links.classList.contains('is-open')&&links.contains(document.activeElement))menu.focus({preventScroll:true});
  });
  layoutObserver.observe(root);
+ bindHomeMotion(root);
+ const stopMotion=homeMotionCleanup;
+ homeMotionCleanup=()=>{stopMotion();layoutObserver.disconnect()};
 }
 
 function landing(){return `${page==='welcome'?'<div class="homepage" id="homepage-top">'+homepageNav():''}<main class="landing"><section class="landing-art">${page==='welcome'?homepageArt():`${brand()}<div class="landing-center"><div class="emblem">${mark()}</div><h2>Healthier habits.<br> Brighter days.</h2><p>A little space to grow into your best self.</p></div>${plant()}${plant().replace('class="plants"','class="plants other"')}<div class="art-footer">Rooted in care. Designed for you.</div>`}</section><section class="landing-content ${page==='auth'?'auth':''}"><span class="demo-tag prototype">PRESENTATION PROTOTYPE</span>${page==='welcome'?`<span class="eyebrow">A LITTLE SPACE FOR STUDENT LIFE</span><h1>Small steps.<br>A brighter you.</h1><p>Make room for rest, check in with yourself, and build gentle daily routines around student life. One small step at a time.</p><div class="landing-features"><span>${icon('moon')} Sleep habits</span><span>${icon('smile')} Mood &amp; energy</span><span>${icon('leaf')} Daily routines</span></div><div class="landing-actions"><button class="btn full" data-action="start">Get started ${icon('right')}</button><button class="text-btn" style="justify-content:center;margin-top:4px" data-action="demo">Explore the demo ${icon('right')}</button></div><p class="demo-note">No account needed to explore. Try it with sample data.</p>`:`<button class="back-link" data-go="welcome">${icon('back')} Back to home</button><span class="eyebrow">${authMode==='signup'?'YOUR NEXT CHAPTER':'A LITTLE SPACE FOR YOU'}</span><h1>${authMode==='signup'?'Welcome to<br>MindRise.':'Welcome<br>back.'}</h1><p>${authMode==='signup'?'Let’s make this space yours.':'Step into your wellness space.'} This is a demo; no real account is created.</p><form id="auth-form">${authMode==='signup'?'<label class="field">Your name<input name="name" placeholder="What should we call you?" maxlength="40" autocomplete="given-name" required></label>':''}<label class="field">Email <span class="muted small">Optional for this demo</span><input name="email" type="email" placeholder="student@example.com" maxlength="100" autocomplete="email"></label><button class="btn full" type="submit">${authMode==='signup'?'Create demo profile':'Continue to demo'} ${icon('right')}</button></form><div class="auth-switch">${authMode==='signup'?'Already exploring?':'New to MindRise?'} <button class="text-btn" data-action="${authMode==='signup'?'login':'start'}">${authMode==='signup'?'Log in':'Get started'}</button></div><p class="demo-note">Profile details stay in this browser. No password required.</p>`}</section></main>${page==='welcome'?'</div>':''}`}
