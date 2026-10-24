@@ -119,3 +119,29 @@ test('a prior private message does not block the next feature question', async (
     else process.env.AI_GATEWAY_API_KEY = oldKey;
   }
 });
+
+test('unavailable paths log safe failure categories without prompt text', async () => {
+  const oldKey = process.env.AI_GATEWAY_API_KEY;
+  const oldFetch = global.fetch;
+  const oldWarn = console.warn;
+  const warnings = [];
+  console.warn = (...parts) => warnings.push(parts.join(' '));
+  try {
+    delete process.env.AI_GATEWAY_API_KEY;
+    const missing = await request({ message: 'How do I add a task?' });
+    assert.equal(missing.statusCode, 503);
+    assert.match(warnings.at(-1), /missing-gateway-key/);
+
+    process.env.AI_GATEWAY_API_KEY = 'test-key';
+    global.fetch = async () => ({ ok: false, status: 401 });
+    const rejected = await request({ message: 'How do I add a task?' });
+    assert.equal(rejected.statusCode, 503);
+    assert.match(warnings.at(-1), /gateway-http-401/);
+    assert.equal(warnings.some(line => line.includes('How do I add a task?') || line.includes('test-key')), false);
+  } finally {
+    console.warn = oldWarn;
+    global.fetch = oldFetch;
+    if (oldKey === undefined) delete process.env.AI_GATEWAY_API_KEY;
+    else process.env.AI_GATEWAY_API_KEY = oldKey;
+  }
+});

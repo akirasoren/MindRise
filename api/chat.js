@@ -85,7 +85,10 @@ module.exports = async function chat(req, res) {
     }
     const question = publicQuestion(message);
     if (!question) return res.status(200).json({ kind: 'off-topic', reply: 'I can help with MindRise features and how to use them. Try asking about tasks, sleep logs, check-ins, the Garden, or your demo profile.' });
-    if (!process.env.AI_GATEWAY_API_KEY) return res.status(503).json({ error: 'Helper unavailable' });
+    if (!process.env.AI_GATEWAY_API_KEY) {
+      console.warn('[support-chat] unavailable: missing-gateway-key');
+      return res.status(503).json({ error: 'Helper unavailable' });
+    }
     const publicHistory = history.filter(item => item.role === 'user' && !PRIVATE.test(item.content)).map(item => publicQuestion(item.content)).filter(Boolean).map(content => ({ role: 'user', content }));
     const gateway = await fetch('https://ai-gateway.vercel.sh/v1/chat/completions', {
       method: 'POST',
@@ -98,12 +101,19 @@ module.exports = async function chat(req, res) {
       }),
       signal: AbortSignal.timeout(8000),
     });
-    if (!gateway.ok) return res.status(503).json({ error: 'Helper unavailable' });
+    if (!gateway.ok) {
+      console.warn(`[support-chat] unavailable: gateway-http-${gateway.status}`);
+      return res.status(503).json({ error: 'Helper unavailable' });
+    }
     const data = await gateway.json();
     const answer = data?.choices?.[0]?.message?.content;
-    if (typeof answer !== 'string' || !answer.trim()) return res.status(503).json({ error: 'Helper unavailable' });
+    if (typeof answer !== 'string' || !answer.trim()) {
+      console.warn('[support-chat] unavailable: empty-gateway-answer');
+      return res.status(503).json({ error: 'Helper unavailable' });
+    }
     return res.status(200).json({ kind: 'answer', reply: answer.trim().slice(0, MAX_REPLY) });
-  } catch (_) {
+  } catch (error) {
+    console.warn(error?.name === 'TimeoutError' ? '[support-chat] unavailable: gateway-timeout' : '[support-chat] unavailable: gateway-request-error');
     return res.status(503).json({ error: 'Helper unavailable' });
   }
 };
