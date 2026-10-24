@@ -37,6 +37,17 @@ test('crisis text bypasses the model and returns both approved languages', async
   } finally { global.fetch = oldFetch; }
 });
 
+test('diagnostic requests receive a clear refusal without calling the model', async () => {
+  const oldFetch = global.fetch;
+  global.fetch = () => { throw new Error('Gateway must not be called'); };
+  try {
+    const res = await request({ message: 'Can you diagnose me?', history: [] });
+    assert.equal(res.statusCode, 200);
+    assert.equal(res.body.kind, 'medical');
+    assert.match(res.body.reply, /cannot diagnose|can.t diagnose/i);
+  } finally { global.fetch = oldFetch; }
+});
+
 test('approved route sends bounded history and enforces no training', async () => {
   const oldKey = process.env.AI_GATEWAY_API_KEY;
   const oldFetch = global.fetch;
