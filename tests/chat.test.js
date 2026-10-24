@@ -32,6 +32,8 @@ test('crisis text bypasses the model and returns both approved languages', async
     assert.equal(res.body.kind, 'crisis');
     assert.match(res.body.reply, /NCMH Crisis Hotline/);
     assert.match(res.body.reply, /Pasensya na/);
+    const english = await request({ message: "I don't want to live", history: [] });
+    assert.equal(english.body.kind, 'crisis');
   } finally { global.fetch = oldFetch; }
 });
 
@@ -90,6 +92,27 @@ test('arbitrary free-text names and history are never forwarded', async () => {
     const upstream = JSON.stringify(sent);
     for (const name of ['Alice', 'Bob', 'Charlie']) assert.equal(upstream.includes(name), false);
     assert.equal(sent.messages.length, 3);
+  } finally {
+    global.fetch = oldFetch;
+    if (oldKey === undefined) delete process.env.AI_GATEWAY_API_KEY;
+    else process.env.AI_GATEWAY_API_KEY = oldKey;
+  }
+});
+
+test('a prior private message does not block the next feature question', async () => {
+  const oldKey = process.env.AI_GATEWAY_API_KEY;
+  const oldFetch = global.fetch;
+  process.env.AI_GATEWAY_API_KEY = 'test-key';
+  let sent;
+  global.fetch = async (_, options) => {
+    sent = JSON.parse(options.body);
+    return { ok: true, json: async () => ({ choices: [{ message: { content: 'Open Tasks.' } }] }) };
+  };
+  try {
+    const res = await request({ message: 'How do tasks work?', history: [{ role: 'user', content: 'My school is FEU' }] });
+    assert.equal(res.body.kind, 'answer');
+    assert.equal(JSON.stringify(sent).includes('FEU'), false);
+    assert.equal(sent.messages.length, 2);
   } finally {
     global.fetch = oldFetch;
     if (oldKey === undefined) delete process.env.AI_GATEWAY_API_KEY;
