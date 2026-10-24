@@ -24,11 +24,13 @@ The main app's HTML, CSS, vanilla JavaScript, and in-app SVG artwork live in `in
 
 Progress is saved in the browser's `localStorage` under `mindrise-prototype-v1`. It is not embedded in the HTML file or synced between devices. Clearing browser data can erase progress. **Profile → Reset presentation** restores the demo defaults.
 
-The chat's visibility, position, and conversation remain in page memory only. Closing or dismissing the bubble keeps the conversation until refresh. The function has no database or sessions, and sends only fixed, public feature questions to AI Gateway rather than raw chat text or app profile data.
+The chat's visibility, position, and conversation remain in page memory only. Closing or dismissing the bubble keeps the conversation until refresh. The function has no database or sessions. For recognized feature topics, it sends the screened wording of the current question and prior user questions to AI Gateway; it never reads browser storage or profile state. Obvious personal details are blocked or removed, but automated screening can miss details, so users should not type personal or sensitive information.
 
 ## Support chat deployment
 
 Set `AI_GATEWAY_API_KEY` in Vercel's **Preview** environment for preview tests and **Production** before releasing the feature. Redeploy after changing environment variables. The server route uses `openai/gpt-4.1-nano`, permits only Azure as provider, and requests `disallowPromptTraining: true` for every call. If no compliant provider is available, the helper displays an unavailable message. The key stays server-side. `CHAT_ALLOWED_ORIGINS` can add a comma-separated list of future first-party origins; the production domain and current Vercel Preview deployment are allowed by default. Origin checks discourage casual cross-site use but are not authentication.
+
+AI Gateway may require the Vercel team to verify a valid payment method before its monthly free credits can be used. A runtime log of `gateway-http-403 type=customer_verification_required` means Gateway blocked inference at that verification step; complete it in the Vercel team's AI Gateway/Billing settings, keep auto top-up off if you want the free-credit limit as the cost backstop, and retry. The function's error logs contain only failure categories and status codes, never prompts or keys.
 
 Run the dependency-free server checks with `node --test tests/chat.test.js`. Review the bilingual Philippines-specific crisis copy and its hotline details before a production release. The deterministic crisis check runs before the model; it is keyword-based and cannot identify every possible crisis phrasing.
 
