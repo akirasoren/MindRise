@@ -4,9 +4,9 @@ A self-contained student wellness prototype for building healthier habits throug
 
 ## Run locally
 
-Open `MindRise.html` in a modern browser and choose **Explore the demo**. No installation, build step, dependencies, or backend is required.
+Open `index.html` in a modern browser and choose **Explore the demo**. The prototype itself has no installation, build step, or dependencies. The support bubble appears after choosing **Support** on the homepage; answers require a Vercel deployment or `vercel dev` because a file opened directly cannot call `/api/chat`.
 
-Keep the `assets/` directory alongside the HTML file. The homepage includes **About Us** and **How It Works** panels; **Log In** and **Get Started** use the existing demo profile flow. On phones, open **Menu** to find these controls. Select a panel again, click outside, use its close button, or press Escape to collapse it.
+Keep the `assets/` directory alongside the HTML file. The homepage includes **About Us** and **How It Works** panels; **Log In** and **Get Started** use the existing demo profile flow. On phones, open **Menu** to find these controls and **Support**. Select a nav panel again, click outside, use its close button, or press Escape to collapse it. Support opens a separate floating chat; its bubble toggles the chat and its x badge hides the bubble.
 
 ## Features
 
@@ -20,9 +20,17 @@ Keep the `assets/` directory alongside the HTML file. The homepage includes **Ab
 
 ## Structure and storage
 
-HTML, CSS, vanilla JavaScript, and the in-app SVG artwork live in `MindRise.html`. The homepage uses optimized local brand images in `assets/`. Screens are rendered from JavaScript functions with shared state and event handlers.
+The main app's HTML, CSS, vanilla JavaScript, and in-app SVG artwork live in `index.html`. `support-chat.css` and `support-chat.js` provide the chat UI; `api/chat.js` is the Vercel function, importing the public `api/help-content.js` and the owner-supplied `api/crisis-response.js`. The homepage uses optimized local brand images in `assets/`. Screens are rendered from JavaScript functions with shared state and event handlers.
 
 Progress is saved in the browser's `localStorage` under `mindrise-prototype-v1`. It is not embedded in the HTML file or synced between devices. Clearing browser data can erase progress. **Profile → Reset presentation** restores the demo defaults.
+
+The chat's visibility, position, and conversation remain in page memory only. Closing or dismissing the bubble keeps the conversation until refresh. The function has no database or sessions, and sends only fixed, public feature questions to AI Gateway rather than raw chat text or app profile data.
+
+## Support chat deployment
+
+Set `AI_GATEWAY_API_KEY` in Vercel's **Preview** environment for preview tests and **Production** before releasing the feature. Redeploy after changing environment variables. The server route uses `openai/gpt-4.1-nano`, permits only Azure as provider, and requests `disallowPromptTraining: true` for every call. If no compliant provider is available, the helper displays an unavailable message. The key stays server-side. `CHAT_ALLOWED_ORIGINS` can add a comma-separated list of future first-party origins; the production domain and current Vercel Preview deployment are allowed by default. Origin checks discourage casual cross-site use but are not authentication.
+
+Run the dependency-free server checks with `node --test tests/chat.test.js`. Review the bilingual Philippines-specific crisis copy and its hotline details before a production release. The deterministic crisis check runs before the model; it is keyword-based and cannot identify every possible crisis phrasing.
 
 ## Prototype scope
 
