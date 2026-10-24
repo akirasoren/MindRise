@@ -102,7 +102,12 @@ module.exports = async function chat(req, res) {
       signal: AbortSignal.timeout(8000),
     });
     if (!gateway.ok) {
-      console.warn(`[support-chat] unavailable: gateway-http-${gateway.status}`);
+      let gatewayType = 'unknown';
+      try {
+        const errorType = (await gateway.json())?.error?.type;
+        if (typeof errorType === 'string' && /^[a-z0-9_]{1,50}$/i.test(errorType)) gatewayType = errorType;
+      } catch (_) { /* Keep diagnostics generic if the gateway has no JSON body. */ }
+      console.warn(`[support-chat] unavailable: gateway-http-${gateway.status} type=${gatewayType}`);
       return res.status(503).json({ error: 'Helper unavailable' });
     }
     const data = await gateway.json();

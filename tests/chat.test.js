@@ -133,11 +133,11 @@ test('unavailable paths log safe failure categories without prompt text', async 
     assert.match(warnings.at(-1), /missing-gateway-key/);
 
     process.env.AI_GATEWAY_API_KEY = 'test-key';
-    global.fetch = async () => ({ ok: false, status: 401 });
+    global.fetch = async () => ({ ok: false, status: 401, json: async () => ({ error: { type: 'access_denied', message: 'private detail that must not be logged' } }) });
     const rejected = await request({ message: 'How do I add a task?' });
     assert.equal(rejected.statusCode, 503);
-    assert.match(warnings.at(-1), /gateway-http-401/);
-    assert.equal(warnings.some(line => line.includes('How do I add a task?') || line.includes('test-key')), false);
+    assert.match(warnings.at(-1), /gateway-http-401 type=access_denied/);
+    assert.equal(warnings.some(line => line.includes('How do I add a task?') || line.includes('test-key') || line.includes('private detail')), false);
   } finally {
     console.warn = oldWarn;
     global.fetch = oldFetch;
