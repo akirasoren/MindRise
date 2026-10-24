@@ -19,7 +19,7 @@ const INTENTS = [
   [/\b(sleep|bedtime|wake.?up|rest|wind.?down)\b/i, 'How do I log and review sleep in MindRise?'],
   [/\b(mood|energy|journal|feel|check.?in|note)\b/i, 'How do mood and energy check-ins work in MindRise?'],
   [/\b(class(?:es)?|schedules?|timetables?|overlaps?|rooms?|punctual)\b/i, 'How do recurring classes and schedule overlaps work in MindRise?'],
-  [/\b(tasks?|to.?dos?|planner|agenda|categor(?:y|ies)|complete)\b/i, 'How do I add, edit, complete, and review tasks in MindRise?'],
+  [/\b(tasks?|taks|to.?dos?|planner|agenda|categor(?:y|ies)|complete)\b/i, 'How do I add, edit, complete, and review tasks in MindRise?'],
   [/\b(gardens?|nursery|plants?|seeds?|pots?|backgrounds?|grow)\b/i, 'How does the MindRise Garden grow and how can I customize it?'],
   [/\b(rewards?|gems?|xp|streaks?|milestones?|early bird|focus pro)\b/i, 'How do MindRise rewards, Mind Gems, XP, and streaks work?'],
   [/\b(themes?|calm mode|motion|appearance)\b/i, 'How do I change MindRise themes and use Calm mode?'],

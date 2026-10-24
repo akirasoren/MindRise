@@ -63,6 +63,27 @@ test('approved route sends bounded history and enforces no training', async () =
   }
 });
 
+test('common task typo routes to the fixed public task question', async () => {
+  const oldKey = process.env.AI_GATEWAY_API_KEY;
+  const oldFetch = global.fetch;
+  process.env.AI_GATEWAY_API_KEY = 'test-key';
+  let sent;
+  global.fetch = async (_, options) => {
+    sent = JSON.parse(options.body);
+    return { ok: true, json: async () => ({ choices: [{ message: { content: 'Open Tasks to add a task.' } }] }) };
+  };
+  try {
+    const res = await request({ message: 'How do I ad a taks?', history: [] });
+    assert.equal(res.body.kind, 'answer');
+    assert.equal(sent.messages.at(-1).content, 'How do I add, edit, complete, and review tasks in MindRise?');
+    assert.equal(JSON.stringify(sent).includes('taks'), false);
+  } finally {
+    global.fetch = oldFetch;
+    if (oldKey === undefined) delete process.env.AI_GATEWAY_API_KEY;
+    else process.env.AI_GATEWAY_API_KEY = oldKey;
+  }
+});
+
 test('other origins and personal details never reach the gateway', async () => {
   const oldFetch = global.fetch;
   global.fetch = () => { throw new Error('Gateway must not be called'); };
