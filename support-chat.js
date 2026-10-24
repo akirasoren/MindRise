@@ -212,6 +212,9 @@
     announcePosition();
   });
   dismiss.addEventListener('click', hide);
+  document.addEventListener('click', event => {
+    if (event.target.closest('.topbar [data-support]')) show();
+  });
   panelClose.addEventListener('click', () => closePanel());
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && !widget.hidden && !panel.hidden) { event.preventDefault(); closePanel(); }

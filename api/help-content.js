@@ -3,7 +3,7 @@ module.exports = `MindRise help for the current responsive browser prototype (no
 
 Getting in: On the homepage, Get Started opens a demo profile form. Log In opens the demo login form. Explore the demo enters directly with sample data. These are presentation flows, not real accounts. There is no cloud sync. Your progress stays in this browser's localStorage and may disappear if browser data is cleared. The support chat itself lasts only until refresh.
 
-Support: The homepage Support button reveals a floating bubble and opens the chat. The bubble toggles the panel; the panel close button and Escape collapse the panel while leaving the bubble. The small x next to the bubble hides both until Support is used again. The bubble can be dragged or moved with arrow keys while focused. Conversation and position remain in this page only and reset on refresh. The bubble stays available in the demo and login screens until hidden.
+Support: The homepage Support button or the app top bar Support button reveals a floating bubble and opens the chat. The bubble toggles the panel; the panel close button and Escape collapse the panel while leaving the bubble. The small x next to the bubble hides both until Support is used again. The bubble can be dragged or moved with arrow keys while focused. Conversation and position remain in this page only and reset on refresh. The bubble stays available in the demo and login screens until hidden.
 
 Navigation: The demo has Overview, My Garden, Track, Tasks, Rewards, and Profile. On narrow screens the app uses bottom navigation. Overview summarizes the latest sleep, mood, energy, today's tasks, activity streak, and garden progress.
 
