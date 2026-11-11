@@ -223,6 +223,11 @@
   async function ask(question) {
     const message = question.trim();
     if (!message || busy) return;
+    if (navigator.onLine === false) {
+      addMessage('assistant', 'You are offline. Reconnect to ask the MindRise helper.', 'error');
+      status.textContent = 'Offline';
+      return;
+    }
     const history = conversation.filter(item => item.kind === 'answer').slice(-6).map(({ role, content }) => ({ role, content }));
     conversation.push({ role: 'user', content: message, kind: 'answer' });
     addMessage('user', message);
@@ -246,8 +251,11 @@
       status.textContent = '';
     } catch (_) {
       loading.remove();
-      addMessage('assistant', 'The helper is unavailable right now. Please try again later.', 'error');
-      status.textContent = 'Helper unavailable';
+      const failed = conversation[conversation.length - 1];
+      if (failed?.role === 'user' && failed.content === message) conversation.pop();
+      const offline = navigator.onLine === false;
+      addMessage('assistant', offline ? 'You are offline. Reconnect to ask the MindRise helper.' : 'The helper is unavailable right now. Please try again later.', 'error');
+      status.textContent = offline ? 'Offline' : 'Helper unavailable';
     } finally {
       busy = false;
       send.disabled = false;
