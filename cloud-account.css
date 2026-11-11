@@ -1,0 +1,19 @@
+.cloud-status{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px 16px;padding:10px 20px;background:var(--surface);border-bottom:1px solid var(--line);color:var(--ink);font-size:13px}
+.cloud-status[hidden]{display:none}
+.cloud-status>span{max-width:65ch;line-height:1.5}
+.cloud-status .btn{min-height:44px}
+.cloud-auth{display:grid;gap:16px;margin:12px 0 24px}
+.cloud-auth p{font-size:13px;line-height:1.7;color:var(--muted)}
+.cloud-auth form{display:grid}
+.cloud-auth-message{min-height:20px;margin-top:10px;color:#8b4c58!important}
+.cloud-auth-divider{display:flex;align-items:center;gap:14px;color:var(--muted);font-size:12px}
+.cloud-auth-divider::before,.cloud-auth-divider::after{content:"";height:1px;flex:1;background:var(--line)}
+.cloud-demo{justify-self:center}
+.cloud-auth-switch{display:flex;align-items:center;justify-content:center;gap:7px;color:var(--muted);font-size:12px}
+.google-signin{position:relative;width:100%;min-height:44px;padding:0 42px;border:1px solid #747775;border-radius:4px;background:#fff;color:#1f1f1f;display:flex;align-items:center;justify-content:center;font-family:"Google Sans",Roboto,Arial,sans-serif;font-size:14px;font-weight:500;line-height:20px;letter-spacing:.1px;transition:background-color .15s,border-color .15s,box-shadow .15s}
+.google-signin img{position:absolute;left:12px;width:18px;height:18px;object-fit:contain}
+.google-signin:hover{background:#f8faff;border-color:#5f6368;box-shadow:0 1px 2px #3c404326}
+.google-signin:active{background:#eef3fe;box-shadow:none}
+.google-signin:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
+.google-signin:disabled{background:#fff;color:#1f1f1f61;border-color:#1f1f1f1f}
+@media(max-width:560px){.cloud-status{padding:12px;justify-content:flex-start}.cloud-status>span{flex-basis:100%}}
